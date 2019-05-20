@@ -4,14 +4,19 @@ import './Name.css';
 import store, {
 	UPDATE_RECIPE_NAME,
 	UPDATE_RECIPE_CATEGORY,
+  UPDATE_AUTHOR_FIRST_NAME,
+  UPDATE_AUTHOR_LAST_NAME,
 } from './../../store';
 
 class Name extends Component {
 	constructor(props) {
 		super(props);
+    const reduxState = store.getState()
 		this.state = {
-			name: '',
-			category: '',
+			recipe: reduxState.recipe,
+      category: reduxState.category,  
+      authorFirstName: reduxState.authorFirstName,
+      authorLastName: reduxState.authorLastName
 		};
 	}
 	handleNameChange(nameVal) {
@@ -26,14 +31,22 @@ class Name extends Component {
 		});
 	}
 	saveChanges() {
-    // Send data to Redux state
+		// Send data to Redux state
+		store.dispatch({
+			type: UPDATE_RECIPE_NAME,
+			payload: this.state.recipe,
+		});
+		store.dispatch({
+			type: UPDATE_RECIPE_CATEGORY,
+			payload: this.state.category,
+    });
     store.dispatch({
-      type: UPDATE_RECIPE_NAME,
-      payload: this.state.name
+      type: UPDATE_AUTHOR_FIRST_NAME,
+      payload: this.state.authorFirstName
     })
     store.dispatch({
-      type: UPDATE_RECIPE_CATEGORY,
-      payload: this.state.category
+      type: UPDATE_AUTHOR_LAST_NAME,
+      payload: this.state.authorLastName
     })
 	}
 	render() {

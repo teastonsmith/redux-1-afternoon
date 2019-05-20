@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import './Author.css';
+import store, { UPDATE_AUTHOR_FIRST_NAME, UPDATE_AUTHOR_LAST_NAME } from './../../store'
 
 class Author extends Component {
   constructor(props) {
