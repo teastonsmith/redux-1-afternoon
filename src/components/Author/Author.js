@@ -6,9 +6,10 @@ import store, { UPDATE_AUTHOR_FIRST_NAME, UPDATE_AUTHOR_LAST_NAME } from './../.
 class Author extends Component {
   constructor(props) {
     super(props);
+    const reduxState = store.getState()
     this.state = {
-      authorFirst: '',
-      authorLast: ''
+      authorFirstName: reduxState.authorFirstName,
+      authorLastName: reduxState.authorLastName
     };
   }
 
@@ -25,6 +26,14 @@ class Author extends Component {
   }
   saveChanges() {
     // Send data to Redux state
+    store.dispatch({
+      type: UPDATE_AUTHOR_FIRST_NAME,
+      payload: this.state.authorFirstName
+    })
+    store.dispatch({
+      type: UPDATE_AUTHOR_LAST_NAME,
+      payload: this.state.authorLastName
+    })
   }
   render() {
     return (
